@@ -6,7 +6,7 @@ import { usePlane } from "./Plane";
 import { useEnemyPlane } from "./EnemyPlane";
 import { useBullet } from "./Bullet";
 
-export function useFighting(emit) {
+export function useFighting({ gameOver }) {
   const { planeInfo } = usePlane();
   const { enemyPlanes, removeEnemyPlane } = useEnemyPlane();
   const { addBullet, bullets, removeBullet } = useBullet();
@@ -31,7 +31,7 @@ export function useFighting(emit) {
       enemyPlanes.forEach((enemy) => {
         if (hitTestObject(enemy, planeInfo)) {
           // game over
-          emit("changeView", "EndView");
+          gameOver && gameOver();
         }
       });
     };

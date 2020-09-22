@@ -30,7 +30,13 @@ export default {
   components: { Map, Plane, EnemyPlane, Bullet },
 };
 
-const { planeInfo, enemyPlanes, bullets, addBullet } = useFighting(emit);
+const { planeInfo, enemyPlanes, bullets, addBullet } = useFighting({
+  gameOver,
+});
+
+function gameOver() {
+  emit("changeView", "EndView");
+}
 
 function handleAttack(position) {
   addBullet(position);
